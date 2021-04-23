@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Set up NordVPN 
+
+sudo usermod -aG nordvpn $USER
+nordvpn login
+nordvpn whitelist add subnet 192.168.0.0/16
+nordvpn whitelist add port 22
+nordvpn status
+nordvpn connect
+nordvpn set killswitch on
+nordvpn set autoconnect on
+nordvpn setting
+nordvpn status
