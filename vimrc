@@ -68,18 +68,81 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " different version somewhere else.
 " Plugin 'ascenator/L9', {'name': 'newL9'}
 
+" Python folding
+Plugin 'tmhedberg/SimpylFold'
+
+" Python indent
+Plugin 'vim-scripts/indentpython.vim'
+
+" Syntax checking/highlighting
+Plugin 'vim-syntastic/syntastic'
+
+" PEP8 checking
+Plugin 'nvie/vim-flake8'
+
+" Wombat colorscheme
+Plugin 'Wombat'
+
+" File tree plugin
+Plugin 'scrooloose/nerdtree'
+let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
+
+" Powerline
+Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
 Plugin 'vim-pandoc/vim-pandoc'
+
+" Enable folding
+set foldmethod=indent
+set foldlevel=99
+nnoremap <space> za
+let g:SimpylFold_docstring_preview = 1
+
+" PEP 8 indentation for python
+au BufNewFile,BufRead *.py
+    \ set tabstop=4
+    \ set softtabstop=4
+    \ set shiftwidth=4
+    \ set textwidth=79
+    \ set expandtab
+    \ set autoindent
+    \ set fileformat=unix
+
+" *.js, *.html, *.css indentation
+au BufNewFile,BufRead *.js, *.html, *.css
+    \ set tabstop=2
+    \ set softtabstop=2
+    \ set shiftwidth=2
+
+" Flag unnecessary whitespace
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+
+" UTF-8 support
+set encoding=utf-8
+
+" virtualenv support
+py << EOF
+import os
+import sys
+if 'VIRTUAL_ENV' in os.environ:
+  project_base_dir = os.environ['VIRTUAL_ENV']
+  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+  execfile(activate_this, dict(__file__=activate_this))
+EOF
+
+" Make python code look pretty
+let python_highlight_all=1
+syntax on
+
+" Background and colorscheme
+set background=dark
+colorscheme wombat
+
+" Line numbering
+" set nu
+
+" Copy from the system clipboard
+set clipboard=unnamed
