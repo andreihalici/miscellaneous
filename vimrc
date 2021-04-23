@@ -37,6 +37,7 @@ if has('syntax') && has('eval')
 endif
 
 set nobackup
+set nowritebackup
 syntax on
 
 " Vundle 
