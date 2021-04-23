@@ -21,7 +21,8 @@ make distclean
 	--enable-terminal \
 	--disable-rightleft \
 	--disable-arabic \
-	--disable-farsi
+	--disable-farsi \
+	--enable-cscope
 
 make
 sudo make install
